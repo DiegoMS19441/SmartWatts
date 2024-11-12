@@ -15,11 +15,14 @@ public class Residencia {
     @Id
     private Long id;
 
+    @Column(name = "nm_rua")
+    private String rua;
+
     @Column(name = "qnt_moradores")
     private Integer moradores;
 
-
-
+    @Column(name = "andares")
+    private Integer andares;
 
 
 }

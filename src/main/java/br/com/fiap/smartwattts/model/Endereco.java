@@ -1,9 +1,8 @@
 package br.com.fiap.smartwattts.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,14 +15,24 @@ public class Endereco {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "logradouro")
+    @NotBlank(message = "Verifique o campo")
     private String logradouro;
 
+    @Column(name = "numero")
+    @NotBlank(message = "Verifique o campo")
     private String numero;
 
+    @Column(name = "complemento")
+    @NotBlank(message = "Verifique o campo")
     private String complemento;
 
+    @Column(name = "estado")
     private Estado estado;
 
+    @Column(name = "cep")
+    @NotBlank(message = "Verifique o campo")
+    @Size(min = 8, max = 8, message = "Verifique a quantidade de caracteres")
     private String cep;
 
 }
