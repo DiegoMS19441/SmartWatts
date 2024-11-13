@@ -20,6 +20,10 @@ public class Fatura {
     @NotNull(message = "O campo não pode ficar vazio")
     private Double valor;
 
+    @Column(name="watts")
+    @NotNull(message="O campo não pode ser")
+    private Double watts;
+
     @Column(name = "bandeira_tarifaria")
     private Bandeira bandeira;
 }
