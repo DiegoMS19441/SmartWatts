@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +13,8 @@
             background-color: #777777;
         }
 
-        .bg-custom-green {
-            background-color: #28a745;
+        .bg-custom-blue {
+            background-color: #050df5;
         }
 
         .bd-placeholder-img {
@@ -48,7 +47,7 @@
 
 <body>
 <header>
-    <div class="collapse bg-custom-gray" id="navbarHeader">
+    <div  class="collapse bg-custom-gray" id="navbarHeader">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
@@ -116,7 +115,13 @@
     </div>
     <div class="navbar navbar-dark bg-custom-green shadow-sm">
         <div class="container">
-            <a th:href="@{/home}" class="navbar-brand font-size-large">AGROCLIMATE</a>
+            <a th:href="@{/home}" class="navbar-brand font-size-large d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" class="bi bi-lightning-charge-fill" viewBox="0 0 16 16" style="margin-right: 5px;">
+                    <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+                </svg>
+                SmartWatts
+            </a>
+
             <button type="button"class="btn btn-light">
                 <a th:href="@{/fazenda/home}" class="no-link-style">Fazenda</a>
             </button>
@@ -124,7 +129,7 @@
                 <a th:href="@{/agricultor/home}" class="no-link-style">Agricultores</a>
             </button>
 
-            <div class="nav-item" sec:authorize="isAuthenticated()">
+            <div class="nav-item">
                 <form th:action="@{/logout}" method="post" style="display:inline;">
                     <button type="submit" class="btn btn-link nav-link text-white">Logout</button>
                 </form>

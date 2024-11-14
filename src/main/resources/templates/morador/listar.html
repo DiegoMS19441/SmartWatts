@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+        <head>
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <meta charset="UTF-8">
+        <title>Listar Produtos</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <h1>Lista de Produtos</h1>
+    <div class="alert alert-success"
+         th:if="!${#strings.isEmpty(mensagem)}" th:text="${mensagem}">
+    </div>
+    <table class="table">
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data Fabricação</th>
+            <th>Novo</th>
+            <th>Status</th>
+            <th>Categoria</th>
+            <th></th>
+        </tr>
+        <tr th:each="prod:${produtos}">
+            <td th:text="${prod.nome}">
+                <a th:href="@{/produto/editar/}+${prod.codigo}"
+                   class="btn btn-outline-primary">Editar</a>
+            </td>
+            <td th:text="${prod.descricao}"></td>
+            <td th:text="${prod.valor}"></td>
+            <td th:text="${#temporals.format(prod.dataFabricacao, 'dd/MM/yyyy')}"></td>
+            <td th:text="${prod.novo?'Novo':'Usado'}"></td>
+            <td th:text="${prod.status?.label}"></td>
+            <td th:text="${prod.categoria?.nome}"></td>
+            <th>
+                <a th:href="@{/produto/editar/}+${prod.id}"
+                   class="btn btn-outline-primary">Editar</a>
+                <!-- Button trigger modal -->
+                <button th:onclick="|produtoId.value = ${prod.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Remover
+                </button>
+            </th>
+        </tr>
+    </table>
+    <a th:href="@{/produto/cadastrar}">Cadastrar</a>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente excluir o produto?
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/produto/remover}" method="post">
+                        <input type="hidden" name="codigo" id="produtoId"/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-danger">Sim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
