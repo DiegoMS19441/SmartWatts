@@ -4,7 +4,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Residentes</title>
+    <title>Residências</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .details-list {
@@ -15,29 +15,28 @@
 </head>
 <body>
 <div layout:fragment="conteudo" class="container mt-4">
-    <h1 class="text-center">Moradores</h1>
+    <h1 class="text-center">Residências</h1>
     <div class="alert alert-success" th:if="!${#strings.isEmpty(mensagem)}" th:text="${mensagem}"></div>
 
-
     <div class="list-group">
-        <div class="list-group-item" th:each="mora : ${moradores}">
-            <!-- Título com nome do morador e logradouro da residência -->
+        <div class="list-group-item" th:each="residencia : ${residencias}">
+            <!-- Título com nome da residência e logradouro do endereço -->
             <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0" style="cursor:pointer;" data-bs-toggle="collapse" th:attr="data-bs-target='#details-' + ${mora.id}">
-                    <i class="bi bi-caret-down-fill"></i> <span th:text="${mora.nome}"></span>
+                <h5 class="mb-0" style="cursor:pointer;" data-bs-toggle="collapse" th:attr="data-bs-target='#moradores-details-' + ${residencia.id}">
+                    <i class="bi bi-caret-down-fill"></i> <span th:text="${residencia.endereco.logradouro} + ' - ' + ${residencia.endereco.numero} + ', ' + ${residencia.endereco.complemento}"></span>
                 </h5>
                 <div>
-                    <a th:href="@{/morador/editar/}+${mora.id}" class="btn btn-outline-primary btn-sm">Editar</a>
-                    <button th:onclick="|moraId.value = ${mora.id}|" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Remover</button>
+                    <a th:href="@{/residencia/editar/}+${residencia.id}" class="btn btn-outline-primary btn-sm">Editar</a>
+                    <button th:onclick="|residenciaId.value = ${residencia.id}|" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Remover</button>
                 </div>
             </div>
 
-            <!-- Detalhes do morador no dropdown -->
-            <div th:id="'details-' + ${mora.id}" class="collapse mt-3">
+            <!-- Detalhes da residência no dropdown -->
+            <div th:id="'moradores-details-' + ${residencia.id}" class="collapse mt-3">
                 <ul class="details-list">
-                    <li><strong>CPF:</strong> <span th:text="${mora.cpf.substring(0, 3) + '.***.***-**'}"></span></li>
-                    <li><strong>Data de Nascimento:</strong> <span th:text="${#temporals.format(mora.dataNascimento, 'dd/MM/yyyy')}"></span></li>
-                    <li><strong>Mora em:</strong> <span th:text="${mora.residencia?.endereco.logradouro}"></span>, <span th:text="${mora.residencia?.endereco.numero}"></span>, <span th:text="${mora.residencia?.endereco.complemento}"></span></li>
+                    <li><strong>CEP:</strong> <span th:text="${residencia.endereco.cep}"></span></li>
+                    <li><strong>Quantidade de Andares:</strong> <span th:text="${residencia.andares}"></span></li>
+                    <li><strong>Quantidade de Moradores:</strong> <span th:text="${residencia.moradores}"></span></li>
                 </ul>
             </div>
         </div>
@@ -55,8 +54,8 @@
                     Deseja continuar com a exclusão? Essa ação não pode ser desfeita.
                 </div>
                 <div class="modal-footer">
-                    <form th:action="@{/morador/remover}" method="post">
-                        <input type="hidden" name="id" id="moraId"/>
+                    <form th:action="@{/residencia/remover}" method="post">
+                        <input type="hidden" name="codigo" id="residenciaId"/>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                         <button type="submit" class="btn btn-danger">Sim</button>
                     </form>

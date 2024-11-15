@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens</title>
+    <!-- Link para o Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <style>
+        .details-list {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="conteudo" class="container mt-4">
+    <h1 class="text-center mb-4">Mensagens</h1>
+
+    <!-- Mensagem de Sucesso -->
+    <div class="alert alert-success" th:if="!${#strings.isEmpty(mensagem)}" th:text="${mensagem}"></div>
+
+    <!-- Lista de Mensagens -->
+    <div class="list-group">
+        <div class="list-group-item" th:each="post : ${posts}">
+            <!-- Título com nome do usuário e mensagem -->
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0" style="cursor:pointer;"
+                    data-bs-toggle="collapse"
+                    th:attr="data-bs-target='#details-' + ${post.id}">
+                    <i class="bi bi-caret-down-fill"></i> <span th:text="${post.usuario.username}"></span> disse em  <span th:text="${#temporals.format(post.dataPost, 'dd/MM/yyyy')}"></span>
+                </h5>
+                <div>
+                    <a th:href="@{/post/editar/{id}(id=${post.id})}" class="btn btn-outline-primary btn-sm">Editar</a>
+                    <a th:href="@{/post/remover(id=${post.id})}" class="btn btn-outline-danger btn-sm">Remover</a>
+                </div>
+            </div>
+
+            <!-- Detalhes do post no dropdown -->
+            <div th:id="'details-' + ${post.id}" class="collapse mt-3">
+                <ul class="details-list">
+                    <li><strong>Mensagem</strong> <span th:text="${post.mensagem}"></span></li>
+                    <li><strong>Para:</strong> <span th:text="${post.residencia?.endereco.logradouro}"></span>, <span th:text="${post.residencia?.endereco.numero}"></span>, <span th:text="${post.residencia?.endereco.complemento}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação para Remover Post -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja continuar com a exclusão? Essa ação não pode ser desfeita.
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/post/remover}" method="post">
+                        <input type="hidden" name="id" id="postId"/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-danger">Sim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script do Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

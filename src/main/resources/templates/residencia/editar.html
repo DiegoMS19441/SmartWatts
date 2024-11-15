@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Residência</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h1 {
+            font-size: 1.75rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="conteudo" class="form-container">
+    <h1>Editar Residência</h1>
+
+    <div class="alert alert-success" th:if="!${#strings.isEmpty(msg)}" th:text="${msg}">
+    </div>
+
+    <form th:action="@{/residencia/editar}" th:object="${residencia}" method="post">
+        <input th:field="*{id}" type="hidden"/>
+        <div class="mb-3">
+            <label class="form-label">Quantidade de Moradores</label>
+            <input type="number" th:field="*{moradores}" class="form-control">
+            <p th:if="${#fields.hasErrors('moradores')}" class="text-danger small" th:errors="*{moradores}"></p>
+        </div>
+
+        <!-- Andares -->
+        <div class="mb-3">
+            <label class="form-label">Andares</label>
+            <input type="number" th:field="*{andares}" class="form-control">
+            <p th:if="${#fields.hasErrors('andares')}" class="text-danger small" th:errors="*{andares}"></p>
+        </div>
+
+        <!-- Endereço - Logradouro -->
+        <div class="row">
+            <div class="mb-3 col">
+                <label class="form-label">Logradouro</label>
+                <input type="text" th:field="*{endereco.logradouro}" class="form-control">
+                <p th:if="${#fields.hasErrors('endereco.logradouro')}" class="text-danger small" th:errors="*{endereco.logradouro}"></p>
+            </div>
+
+            <!-- Endereço - Número -->
+            <div class="mb-3 col">
+                <label class="form-label">Número</label>
+                <input type="text" th:field="*{endereco.numero}" class="form-control">
+                <p th:if="${#fields.hasErrors('endereco.numero')}" class="text-danger small" th:errors="*{endereco.numero}"></p>
+            </div>
+        </div>
+
+        <!-- Endereço - Complemento -->
+        <div class="mb-3">
+            <label class="form-label">Complemento</label>
+            <input type="text" th:field="*{endereco.complemento}" class="form-control">
+            <p th:if="${#fields.hasErrors('endereco.complemento')}" class="text-danger small" th:errors="*{endereco.complemento}"></p>
+        </div>
+
+        <!-- Endereço - CEP -->
+        <div class="mb-3">
+            <label class="form-label">CEP</label>
+            <input type="text" th:field="*{endereco.cep}" class="form-control">
+            <p th:if="${#fields.hasErrors('endereco.cep')}" class="text-danger small" th:errors="*{endereco.cep}"></p>
+        </div>
+
+        <!-- Botão de Salvar -->
+        <div class="d-grid">
+            <button class="btn btn-success btn-lg">Salvar</button>
+        </div>
+    </form>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

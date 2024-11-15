@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.fiap</groupId>
-    <artifactId>smartwattts</artifactId>
+    <artifactId>smartwatts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>smartwattts</name>
+    <name>smartwatts</name>
     <description>Projeto desenvolvido para entrega da global solution.
         Os integrantes são:
         RM551191 - Diego Mascarenhas Santos
@@ -74,6 +74,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+            <version>3.1.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>

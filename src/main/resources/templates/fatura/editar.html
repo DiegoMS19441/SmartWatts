@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Fatura</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        .details-list {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="conteudo" class="container mt-4">
+    <h1 class="text-center">Editar Fatura</h1>
+    <form th:action="@{/fatura/editar}" th:object="${fatura}" method="post">
+
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+
+        <input th:field="*{id}" type="hidden"/>
+
+        <div class="mb-3">
+            <label class="form-label">Mês de Referência</label>
+            <input class="form-control" th:field="*{mesReferencia}" type="text" id="mesReferencia" placeholder="Informe o mês de referência da fatura">
+            <p th:if="${#fields.hasErrors('mesReferencia')}" class="text text-danger" th:errors="*{mesReferencia}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Valor</label>
+            <input class="form-control" th:field="*{valor}" type="text" id="valor" placeholder="Informe o valor da fatura">
+            <p th:if="${#fields.hasErrors('valor')}" class="text text-danger" th:errors="*{valor}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Consumo (kWh)</label>
+            <input class="form-control" th:field="*{kWh}" type="text" id="kWh" placeholder="Informe o consumo de energia em kWh">
+            <p th:if="${#fields.hasErrors('kWh')}" class="text text-danger" th:errors="*{kWh}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Bandeira Tarifária</label>
+            <select th:field="*{bandeira}" class="form-select">
+                <option value="">Selecione</option>
+                <option th:each="band :${bandeira}"
+                        th:value="${band}" th:text="${band.label}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('bandeira')}" class="text text-danger" th:errors="*{bandeira}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Residência</label>
+            <select th:field="*{residencia.id}" class="form-select">
+                <option value="">Selecione</option>
+                <option th:each="residencia : ${residencias}" th:value="${residencia.id}" th:text="${residencia.endereco.logradouro}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('residencia')}" class="text text-danger" th:errors="*{residencia}"></p>
+        </div>
+
+
+        <button class="btn btn-success">Salvar</button>
+
+        <br>
+        <p th:text="${msg}"></p>
+    </form>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

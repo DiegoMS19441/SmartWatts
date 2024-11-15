@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Editar Produto</title>
 </head>
 <body>
+<div layout:fragment="conteudo">
+    <h1>Editar morador</h1>
+    <form th:action="@{/morador/editar}" th:object="${morador}" method="post">
+        <input th:field="*{id}" type="hidden"/>
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control">
+            <p th:if="${#fields.hasErrors('nome')}" class="text-danger small" th:errors="*{nome}"></p>
+        </div>
 
+        <div class="mb-3">
+            <label class="form-label">CPF</label>
+            <input type="text" th:field="*{cpf}" class="form-control">
+            <p th:if="${#fields.hasErrors('cpf')}" class="text-danger small" th:errors="*{cpf}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Data de Nascimento</label>
+            <input type="date" th:field="*{dataNascimento}" class="form-control">
+            <p th:if="${#fields.hasErrors('dataNascimento')}" class="text-danger small" th:errors="*{dataNascimento}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mora em:</label>
+            <select th:field="*{residencia.id}" class="form-select">
+                <option value="">Selecione</option>
+                <option th:each="r : ${residencias}" th:value="${r.id}" th:text="${r.endereco.logradouro}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('residencia')}" class="text-danger small" th:errors="*{residencia}"></p>
+        </div>
+
+        <button class="btn btn-success">Salvar</button>
+
+        <br>
+        <p th:text="${msg}"></p>
+    </form>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
