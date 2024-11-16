@@ -35,7 +35,7 @@
     <form th:object="${usuario}" th:action="@{/usuario/cadastrar}" method="post">
         <!-- Username -->
         <div class="mb-3">
-            <label class="form-label">Username</label>
+            <label class="form-label">Nome de Usuário</label>
             <input th:field="*{username}" class="form-control">
             <p th:if="${#fields.hasErrors('username')}" class="text-danger small" th:errors="*{username}"></p>
         </div>
@@ -43,7 +43,7 @@
 
         <!-- Password -->
         <div class="mb-3">
-            <label class="form-label">Password</label>
+            <label class="form-label">Senha</label>
             <input type="password" th:field="*{password}" class="form-control">
             <p th:if="${#fields.hasErrors('password')}" class="text-danger small" th:errors="*{password}"></p>
         </div>

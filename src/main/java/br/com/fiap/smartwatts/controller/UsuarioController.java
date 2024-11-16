@@ -57,32 +57,18 @@ public class UsuarioController {
         return "redirect:/login";
     }
 
-    @GetMapping("editar/{id}")
-    public String editar(@PathVariable("id") Long id, Model model) {
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        model.addAttribute("usuario", new UserForm());
-        model.addAttribute("roles", roleRepository.findAll());
-        return "usuario/editar";
-    }
-
-    @PostMapping("editar")
-    @Transactional
-    public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("roles", roleRepository.findAll());
-            return "usuario/editar";
-        }
-        usuarioRepository.save(usuario);
-        redirectAttributes.addFlashAttribute("mensagem", "Atualizado com sucesso");
-        return "redirect:/usuario/listar";
-    }
-
     @GetMapping("listar")
     public String listarUsuario(Model model) {
         model.addAttribute("usuarios", usuarioRepository.findAll());
         return "usuario/listar";
     }
 
-
+    @PostMapping("remover")
+    @Transactional
+    public String remover(Long id, RedirectAttributes redirectAttributes) {
+        usuarioRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("mensagem", "Usuario Removido");
+        return "redirect:/usuario/listar";
+    }
 
 }
