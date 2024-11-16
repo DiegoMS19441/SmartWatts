@@ -35,14 +35,12 @@
 
     <form th:action="@{/fatura/cadastrar}" th:object="${fatura}" method="post">
 
-        <!-- Valor da Fatura -->
         <div class="mb-3">
             <label class="form-label">Valor da Fatura</label>
             <input type="number" step="0.01" th:field="*{valor}" class="form-control" placeholder="Valor em reais">
             <p th:if="${#fields.hasErrors('valor')}" class="text-danger small" th:errors="*{valor}"></p>
         </div>
 
-        <!-- Consumo em kWh -->
         <div class="mb-3">
             <label class="form-label">Consumo (kWh)</label>
             <input type="number" step="0.01" th:field="*{kWh}" class="form-control" placeholder="Consumo em kWh">
@@ -56,7 +54,6 @@
         </div>
 
 
-        <!-- Bandeira Tarifária -->
         <div class="mb-3">
             <label class="form-label">Bandeira Tarifária</label>
             <select th:field="*{bandeira}" class="form-select">
@@ -66,16 +63,14 @@
             </select>
         </div>
 
-        <!-- Residência Associada -->
         <div class="mb-3">
             <label class="form-label">Residência</label>
             <select th:field="*{residencia.id}" class="form-select">
-                <option th:each="res : ${residencias}" th:value="${res.id}" th:text="${res.endereco.logradouro}">Residência</option>
+                <option th:each="r : ${residencias}" th:value="${r.id}" th:text="${r.endereco.logradouro} + ' ' + ${r.endereco.numero}"></option>
             </select>
             <p th:if="${#fields.hasErrors('residencia')}" class="text-danger small" th:errors="*{residencia}"></p>
         </div>
 
-        <!-- Botão de Cadastro -->
         <div class="d-grid">
             <button class="btn btn-success btn-lg">Cadastrar</button>
         </div>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Listagem de Faturas</title>
@@ -23,25 +24,27 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0" style="cursor:pointer;" data-bs-toggle="collapse" th:attr="data-bs-target='#details-' + ${fatura.id}">
                     <i class="bi bi-caret-down-fill"></i>
-                    <span th:text="${fatura.residencia.endereco.logradouro}"></span> |
+                    <span th:text="${fatura.residencia.endereco.logradouro} + ' ' + ${fatura.residencia.endereco.numero}"></option>
+                    "></span> |
                     <span th:text="${#temporals.format(fatura.mesReferencia, 'MM/yyyy')}"></span>
                 </h5>
                 <div>
-                    <a th:href="@{/fatura/editar/}+${fatura.id}" class="btn btn-outline-primary btn-sm">Editar</a>
-                    <button th:onclick="|faturaId.value = ${fatura.id}|" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Remover</button>
+                    <a   sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/fatura/editar/}+${fatura.id}" class="btn btn-outline-primary btn-sm">Editar</a>
+                    <button   sec:authorize="hasRole('ROLE_ADMIN')"  th:onclick="|faturaId.value = ${fatura.id}|" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Remover</button>
                 </div>
             </div>
 
-            <!-- Detalhes da fatura no dropdown -->
             <div th:id="'details-' + ${fatura.id}" class="collapse mt-3">
                 <ul class="details-list">
                     <li><strong>Consumo (kWh):</strong> <span th:text="${fatura.kWh}"></span></li>
                     <li><strong>Bandeira Tarifária:</strong> <span th:text="${fatura.bandeira.label}"></span></li>
-                    <li><strong>Valor pago:</strong> <span th:text="${fatura.valor}"></span></li>
+                    <li><strong>Valor pago:</strong> R$ <span th:text="${fatura.valor}"></span></li>
                 </ul>
             </div>
         </div>
     </div>
+    <a    sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/fatura/cadastrar}" class="btn btn-outline-primary ">Cadastrar</a>
+
 
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">

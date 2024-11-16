@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
@@ -40,14 +41,12 @@
             <p th:if="${#fields.hasErrors('moradores')}" class="text-danger small" th:errors="*{moradores}"></p>
         </div>
 
-        <!-- Andares -->
         <div class="mb-3">
             <label class="form-label">Andares</label>
             <input type="number" th:field="*{andares}" class="form-control">
             <p th:if="${#fields.hasErrors('andares')}" class="text-danger small" th:errors="*{andares}"></p>
         </div>
 
-        <!-- Endereço - Logradouro -->
         <div class="row">
             <div class="mb-3 col">
                 <label class="form-label">Logradouro</label>
@@ -55,7 +54,6 @@
                 <p th:if="${#fields.hasErrors('endereco.logradouro')}" class="text-danger small" th:errors="*{endereco.logradouro}"></p>
             </div>
 
-            <!-- Endereço - Número -->
             <div class="mb-3 col">
                 <label class="form-label">Número</label>
                 <input type="text" th:field="*{endereco.numero}" class="form-control">
@@ -63,21 +61,18 @@
             </div>
         </div>
 
-        <!-- Endereço - Complemento -->
         <div class="mb-3">
             <label class="form-label">Complemento</label>
             <input type="text" th:field="*{endereco.complemento}" class="form-control">
             <p th:if="${#fields.hasErrors('endereco.complemento')}" class="text-danger small" th:errors="*{endereco.complemento}"></p>
         </div>
 
-        <!-- Endereço - CEP -->
         <div class="mb-3">
             <label class="form-label">CEP</label>
             <input type="text" th:field="*{endereco.cep}" class="form-control">
             <p th:if="${#fields.hasErrors('endereco.cep')}" class="text-danger small" th:errors="*{endereco.cep}"></p>
         </div>
 
-        <!-- Botão de Salvar -->
         <div class="d-grid">
             <button class="btn btn-success btn-lg">Salvar</button>
         </div>

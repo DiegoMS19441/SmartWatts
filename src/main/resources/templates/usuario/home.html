@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Gerenciamento de usuarios</title>
@@ -23,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <p>Novo Usuário da plataforma.</p>
-                        <button type="button" class="w-100 btn btn-lg btn-success">
+                        <button   sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="w-100 btn btn-lg btn-success">
                             <a  th:href="@{/usuario/cadastrar}" style="color: white" >Vamos lá</a>
                         </button>
                     </div>

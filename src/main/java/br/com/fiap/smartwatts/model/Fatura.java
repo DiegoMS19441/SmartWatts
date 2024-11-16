@@ -17,17 +17,17 @@ public class Fatura {
     @Column(name="id_fatura")
     private Long id;
 
-    @Column(name = "valor_fatura")
+    @Column(name = "valor_fatura", nullable = false)
     @Min(value = 0, message = "Humm, não me parece certo um valor negativo.")
     @NotNull(message = "O campo não pode ficar vazio.")
     private Double valor;
 
-    @Column(name="watts")
+    @Column(name="watts", nullable = false)
     @NotNull(message="O campo não pode ficar vazio.")
     @Min(value = 0, message = "Esse campo não aceita números negativos.")
     private Double kWh;
 
-    @Column(name = "mes_fatura", nullable = false, unique = true)
+    @Column(name = "mes_fatura", nullable = false)
     @NotNull(message = "Por favor preencha o campo.")
     private LocalDate mesReferencia;
 

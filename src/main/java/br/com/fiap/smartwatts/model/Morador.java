@@ -18,17 +18,17 @@ public class Morador {
     @Column(name = "id_morador")
     private Long id;
 
-    @Column(name = "nm_morador")
+    @Column(name = "nm_morador", nullable = false)
     @NotBlank(message = "Esse campo precisa de atenção")
     @Size(min = 3, max = 100)
     private String nome;
 
-    @Column(name = "cpf_morador", unique = true)
+    @Column(name = "cpf_morador", unique = true, nullable = false)
     @NotBlank(message = "Esse campo precisa de atenção")
     @Size(min = 11, max = 11, message = "humm, parece que você forneceu numeros a menos ou a mais")
     private String cpf;
 
-    @Column(name = "dt_nascimento")
+    @Column(name = "dt_nascimento", nullable = false)
     @Past
     private LocalDate dataNascimento;
 

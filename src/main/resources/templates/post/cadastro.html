@@ -52,7 +52,7 @@
             <label class="form-label">Para qual residencia você quer mandar?</label>
             <select th:field="*{residencia.id}" class="form-select">
                 <option value="">Selecione</option>
-                <option th:each="r : ${residencias}" th:value="${r.id}" th:text="${r.endereco.logradouro}"></option>
+                <option th:each="r : ${residencias}" th:value="${r.id}" th:text="${r.endereco.logradouro} + ' ' + ${r.endereco.numero}"></option>
             </select>
             <p th:if="${#fields.hasErrors('residencia')}" class="text-danger small" th:errors="*{residencia}"></p>
         </div>

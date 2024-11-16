@@ -2,6 +2,8 @@ package br.com.fiap.smartwatts.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +18,14 @@ public class Residencia {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "qnt_moradores")
+    @Column(name = "qnt_moradores", nullable = false)
+    @Min(value=0, message = "O Valor não pode ser menor que zero")
+    @NotNull(message = "Por favor preencha o campo.")
     private Integer moradores;
 
-    @Column(name = "andares")
+    @Column(name = "andares", nullable = false)
+    @Min(value=1, message = "Entrada inválida")
+    @NotNull(message = "Por favor preencha o campo.")
     private Integer andares;
 
 

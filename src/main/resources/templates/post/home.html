@@ -4,7 +4,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciamento de moradores</title>
+    <title>Mensagens</title>
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
 
 </head>
@@ -22,7 +22,7 @@
                         <h4 class="my-0 fw-normal">Mande uma mensagem para uma casa</h4>
                     </div>
                     <div class="card-body">
-                        <p>Novo morador</p>
+                        <p>Mande uma mensagem.</p>
                         <button type="button" class="w-100 btn btn-lg btn-success">
                             <a  th:href="@{/post/cadastrar}" style="color: white" >Vamos lá</a>
                         </button>
@@ -38,10 +38,10 @@
                 </svg>
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Veja quem está cadastrado</h4>
+                        <h4 class="my-0 fw-normal">Ver mensagens</h4>
                     </div>
                     <div class="card-body">
-                        <p>Visualize os cadastrados</p>
+                        <p>Vejas as mensagens mais recentes.</p>
                         <button type="button" class="w-100 btn btn-lg btn-primary">
                             <a th:href="@{/post/listar}" style="color: white">Ver</a>
                         </button>

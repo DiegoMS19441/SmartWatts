@@ -37,7 +37,6 @@
         <div class="mb-3">
             <label class="form-label">Nome de Usuário</label>
             <input th:field="*{username}" class="form-control">
-            <p th:if="${#fields.hasErrors('username')}" class="text-danger small" th:errors="*{username}"></p>
         </div>
 
 
@@ -45,7 +44,6 @@
         <div class="mb-3">
             <label class="form-label">Senha</label>
             <input type="password" th:field="*{password}" class="form-control">
-            <p th:if="${#fields.hasErrors('password')}" class="text-danger small" th:errors="*{password}"></p>
         </div>
 
         <!-- Roles -->
@@ -55,7 +53,6 @@
                 <input type="checkbox" th:field="*{roles}" th:value="${r.name}">
                 <label th:text="${r.label}"></label>
             </div>
-            <p th:if="${#fields.hasErrors('roles')}" class="text-danger small" th:errors="*{roles}"></p>
         </div>
 
         <div class="d-grid">

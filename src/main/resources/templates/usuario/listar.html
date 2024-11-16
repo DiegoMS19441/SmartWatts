@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Listagem de Usuários</title>
@@ -23,17 +24,17 @@
         <div class="list-group-item" th:each="user : ${usuarios}">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0" style="cursor:pointer;" data-bs-toggle="collapse" th:attr="data-bs-target='#details-' + ${user.id}">
-                    <i class="bi bi-caret-down-fill"></i> <span th:text="${user.username}"></span>
+                    <i class="bi bi-caret-down-fill"></i> <span th:text="${user.username} "></span>
                 </h5>
                 <div>
-                    <button th:onclick="|userId.value = ${user.id}|" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Remover</button>
+                    <button   sec:authorize="hasRole('ROLE_ADMIN')" th:onclick="|userId.value = ${user.id}|" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Remover</button>
                 </div>
             </div>
 
         </div>
     </div>
+    <a   sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/usuario/cadastrar}" class="btn btn-outline-primary ">Cadastrar</a>
 
-    <!-- Modal de Confirmação -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
