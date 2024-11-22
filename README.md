@@ -73,8 +73,8 @@ veja abaixo suas credenciais de acesso e nivel de permissão:
 
 # Links
 
-Video pitch:
+Video pitch: https://youtu.be/PthkoWtVrSo
 
-Video de apresentação do app:
+Video de apresentação do app: https://youtu.be/xzDf333OCw4
 
-Video de deploy em nuvem:
+Video de deploy em nuvem: https://youtu.be/Yrqtc65Xw68
